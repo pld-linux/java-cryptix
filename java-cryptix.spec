@@ -1,3 +1,5 @@
+# WON'T BUILD WITH J1.5 - uses some reserved keywords as variable names,
+# needs compiling in 1.4 compatible mode (-source 1.4)
 Summary:	Java crypto package
 Summary(pl):	Pakiet kryptograficzny Javy
 Name:		cryptix
