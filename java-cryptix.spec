@@ -10,7 +10,7 @@ Group:		Development/Languages/Java
 Source0:	http://www.cryptix.org/dist/%{name}32-%{snapshot}-r%{version}.zip
 # Source0-md5:	7a3545ede3fff5c89eba601fea03791a
 Source1:	%{name}.build.xml
-URL:		http://www.cryptix.org
+URL:		http://www.cryptix.org/
 BuildRequires:	jakarta-ant >= 1.5
 Requires:	jre >= 1.1
 BuildArch:	noarch
