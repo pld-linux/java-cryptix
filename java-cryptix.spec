@@ -43,7 +43,7 @@ ant javadoc
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javalibdir}
 cp build/lib/%{name}.jar $RPM_BUILD_ROOT%{_javalibdir}
-ln -sf %{name}.jar $RPM_BUILD_ROOT/%{_javalibdir}/%{name}-%{version}.jar
+ln -sf %{name}.jar $RPM_BUILD_ROOT%{_javalibdir}/%{name}-%{version}.jar
 
 %clean
 rm -rf $RPM_BUILD_ROOT
