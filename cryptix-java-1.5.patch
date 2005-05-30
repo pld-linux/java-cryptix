@@ -1,0 +1,41 @@
+diff -uNr cryptix-3.2.0-orig/src/xjava/security/IJCE.java cryptix-3.2.0/src/xjava/security/IJCE.java
+--- cryptix-3.2.0-orig/src/xjava/security/IJCE.java	2000-08-17 13:35:24.000000000 +0200
++++ cryptix-3.2.0/src/xjava/security/IJCE.java	2005-05-30 09:49:13.000000000 +0200
+@@ -195,9 +195,9 @@
+ 
+         String typedot = type + ".";
+         Vector algorithms = new Vector();
+-        Enumeration enum = provider.propertyNames();
+-        while (enum.hasMoreElements()) {
+-            String key = (String) (enum.nextElement());
++        Enumeration enum_names = provider.propertyNames();
++        while (enum_names.hasMoreElements()) {
++            String key = (String) (enum_names.nextElement());
+             if (key.startsWith(typedot))
+                 algorithms.addElement(key.substring(typedot.length()));
+         }
+@@ -236,18 +236,18 @@
+         Provider[] providers = getProvidersInternal();
+ 
+         for (int i = 0; i < providers.length; i++) {
+-            Enumeration enum = providers[i].propertyNames();
+-            while (enum.hasMoreElements()) {
+-                String key = (String) (enum.nextElement());
++            Enumeration enum_names = providers[i].propertyNames();
++            while (enum_names.hasMoreElements()) {
++                String key = (String) (enum_names.nextElement());
+                 if (key.startsWith(typedot))
+                     algorithms.put(key.substring(typedot.length()), "");
+             }
+         }
+         String[] buf = new String[algorithms.size()];
+-        Enumeration enum = algorithms.keys();
++        Enumeration enum_alg = algorithms.keys();
+         int n = 0;
+-        while (enum.hasMoreElements())
+-            buf[n++] = (String) (enum.nextElement());
++        while (enum_alg.hasMoreElements())
++            buf[n++] = (String) (enum_alg.nextElement());
+ 
+         return buf;
+     }
