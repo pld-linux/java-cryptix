@@ -13,7 +13,7 @@ Source0:	http://www.cryptix.org/dist/%{name}32-%{snapshot}-r%{version}.zip
 Source1:	%{name}.build.xml
 URL:		http://www.cryptix.org/
 Patch0:		%{name}-java-1.5.patch
-BuildRequires:	jakarta-ant >= 1.5
+BuildRequires:	ant >= 1.5
 BuildRequires:	unzip
 Requires:	jre >= 1.1
 BuildArch:	noarch
