@@ -1,7 +1,7 @@
 # WON'T BUILD WITH J1.5 - uses some reserved keywords as variable names,
 # needs compiling in 1.4 compatible mode (-source 1.4)
 Summary:	Java crypto package
-Summary(pl.UTF-8):   Pakiet kryptograficzny Javy
+Summary(pl.UTF-8):	Pakiet kryptograficzny Javy
 Name:		cryptix
 Version:	3.2.0
 Release:	1
