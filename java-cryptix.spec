@@ -1,5 +1,3 @@
-# WON'T BUILD WITH J1.5 - uses some reserved keywords as variable names,
-# needs compiling in 1.4 compatible mode (-source 1.4)
 Summary:	Java crypto package
 Summary(pl.UTF-8):	Pakiet kryptograficzny Javy
 Name:		cryptix
@@ -12,6 +10,8 @@ Source0:	http://www.cryptix.org/dist/%{name}32-%{snapshot}-r%{version}.zip
 # Source0-md5:	7a3545ede3fff5c89eba601fea03791a
 Source1:	%{name}.build.xml
 URL:		http://www.cryptix.org/
+BuildRequires:	jpackage-utils
+BuildRequires:	rpmbuild(macros) >= 1.300
 Patch0:		%{name}-java-1.5.patch
 BuildRequires:	ant >= 1.5
 BuildRequires:	unzip
@@ -35,10 +35,10 @@ PGP 2.x. Cryptix 3 działa zarówno na JDK 1.1 jak i JDK 1.2 (Java 2).
 %setup -q -c
 %patch0 -p1
 cp %{SOURCE1} build.xml
-find . -name "*.jar" -exec rm -f {} \;
+find -name '*.jar' | xargs rm -v
 
 %build
-ant jar javadoc
+%ant jar javadoc
 
 %install
 rm -rf $RPM_BUILD_ROOT
