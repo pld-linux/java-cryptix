@@ -1,3 +1,4 @@
+%define 	snapshot	20001002
 Summary:	Java crypto package
 Summary(pl.UTF-8):	Pakiet kryptograficzny Javy
 Name:		cryptix
@@ -5,7 +6,6 @@ Version:	3.2.0
 Release:	1
 License:	BSD-like
 Group:		Development/Languages/Java
-%define 	snapshot	20001002
 Source0:	http://www.cryptix.org/dist/%{name}32-%{snapshot}-r%{version}.zip
 # Source0-md5:	7a3545ede3fff5c89eba601fea03791a
 Source1:	%{name}.build.xml
@@ -14,6 +14,7 @@ BuildRequires:	jpackage-utils
 BuildRequires:	rpmbuild(macros) >= 1.300
 Patch0:		%{name}-java-1.5.patch
 BuildRequires:	ant >= 1.5
+BuildRequires:	jdk
 BuildRequires:	unzip
 Requires:	jre >= 1.1
 BuildArch:	noarch
