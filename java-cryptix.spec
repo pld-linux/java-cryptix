@@ -1,24 +1,52 @@
+%bcond_without	javadoc		# build api docs
+%if "%{pld_release}" == "ti"
+%bcond_without	java_sun	# build with gcj
+%else
+%bcond_with	java_sun	# build with java-sun
+%endif
+#
+%include	/usr/lib/rpm/macros.java
+
 %define 	snapshot	20001002
+%define		srcname		cryptix
 Summary:	Java crypto package
 Summary(pl.UTF-8):	Pakiet kryptograficzny Javy
-Name:		cryptix
+Name:		java-cryptix
 Version:	3.2.0
 Release:	1
 License:	BSD-like
-Group:		Development/Languages/Java
-Source0:	http://www.cryptix.org/dist/%{name}32-%{snapshot}-r%{version}.zip
+Group:		Libraries/Java
+Source0:	http://www.cryptix.org/dist/%{srcname}32-%{snapshot}-r%{version}.zip
 # Source0-md5:	7a3545ede3fff5c89eba601fea03791a
-Source1:	%{name}.build.xml
+Source1:	%{srcname}.build.xml
+Patch0:		%{srcname}-java-1.5.patch
 URL:		http://www.cryptix.org/
+BuildRequires:	ant >= 1.5
+%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
+%{?with_java_sun:BuildRequires:	java-sun}
 BuildRequires:	jpackage-utils
 BuildRequires:	rpmbuild(macros) >= 1.300
-Patch0:		%{name}-java-1.5.patch
-BuildRequires:	ant >= 1.5
-BuildRequires:	jdk
 BuildRequires:	unzip
 Requires:	jre >= 1.1
+Provides:	jce
+Obsoletes:	cryptix
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%package javadoc
+Summary:	Online manual for %{srcname}
+Summary(pl.UTF-8):	Dokumentacja online do %{srcname}
+Group:		Documentation
+Requires:	jpackage-utils
+
+%description javadoc
+Documentation for %{srcname}.
+
+%description javadoc -l pl.UTF-8
+Dokumentacja do %{srcname}.
+
+%description javadoc -l fr.UTF-8
+Javadoc pour %{srcname}.
 
 %description
 Cryptix 3 is a cleanroom implementation of Sun's Java Cryptography
@@ -39,18 +67,35 @@ cp %{SOURCE1} build.xml
 find -name '*.jar' | xargs rm -v
 
 %build
-%ant jar javadoc
+%ant jar %{?with_javadoc:javadoc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javadir}
-cp build/lib/%{name}.jar $RPM_BUILD_ROOT%{_javadir}
-ln -sf %{name}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
+cp build/lib/%{srcname}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}-%{version}.jar
+ln -sf %{srcname}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}.jar
+
+# javadoc
+%if %{with javadoc}
+install -d $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+cp -a doc/api/* $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+ln -s %{srcname}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{srcname} # ghost symlink
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post javadoc
+ln -nfs %{srcname}-%{version} %{_javadocdir}/%{srcname}
 
 %files
 %defattr(644,root,root,755)
 %doc LICENCE.TXT README.TXT build/api
 %{_javadir}/*.jar
+
+%if %{with javadoc}
+%files javadoc
+%defattr(644,root,root,755)
+%{_javadocdir}/%{srcname}-%{version}
+%ghost %{_javadocdir}/%{srcname}
+%endif
