@@ -13,7 +13,7 @@ Summary:	Java crypto package
 Summary(pl.UTF-8):	Pakiet kryptograficzny Javy
 Name:		java-cryptix
 Version:	3.2.0
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		Libraries/Java
 Source0:	http://www.cryptix.org/dist/%{srcname}32-%{snapshot}-r%{version}.zip
@@ -28,7 +28,6 @@ BuildRequires:	jpackage-utils
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	unzip
 Requires:	jre >= 1.1
-Provides:	jce
 Obsoletes:	cryptix
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
