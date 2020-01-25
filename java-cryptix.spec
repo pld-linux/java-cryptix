@@ -1,5 +1,4 @@
 %bcond_without	javadoc		# build api docs
-%include	/usr/lib/rpm/macros.java
 
 %define 	snapshot	20001002
 %define		srcname		cryptix
