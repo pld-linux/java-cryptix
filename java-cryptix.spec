@@ -53,7 +53,7 @@ Javadoc pour %{srcname}.
 
 %prep
 %setup -q -c
-%patch0 -p1
+%patch -P0 -p1
 cp %{SOURCE1} build.xml
 find -name '*.jar' | xargs rm -v
 
