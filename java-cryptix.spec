@@ -1,12 +1,14 @@
 %bcond_without	javadoc		# build api docs
 
+%{?use_default_jdk:%use_default_jdk 8}
+
 %define 	snapshot	20001002
 %define		srcname		cryptix
 Summary:	Java crypto package
 Summary(pl.UTF-8):	Pakiet kryptograficzny Javy
 Name:		java-cryptix
 Version:	3.2.0
-Release:	3
+Release:	4
 License:	BSD-like
 Group:		Libraries/Java
 Source0:	http://www.cryptix.org/dist/%{srcname}32-%{snapshot}-r%{version}.zip
@@ -15,9 +17,9 @@ Source1:	%{srcname}.build.xml
 Patch0:		%{srcname}-java-1.5.patch
 URL:		http://www.cryptix.org/
 BuildRequires:	ant >= 1.5
-BuildRequires:	jdk
+%buildrequires_jdk
 BuildRequires:	jpackage-utils
-BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	rpmbuild(macros) >= 1.556
 BuildRequires:	unzip
 Requires:	jre >= 1.1
 Obsoletes:	cryptix
